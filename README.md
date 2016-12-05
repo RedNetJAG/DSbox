@@ -1,12 +1,12 @@
 # Data Science box (DSbox)
 This is a Linux (Ubuntu) box deployed by vagrant including the following Data Science apps:
-- [Spark] 1.5.2: one master node and up to 9 slaves. 
+- [Spark] 2.0.2: one master node and up to 9 slaves.
 - [Jupyter] 4.0.6 (IPython 4.0.1): kernels for Python 2 & 3, R, and Scala 2.10. It also includes [RISE], [test_helper], and [IPython-extensions].
 - [Python] 2 and 3.
 - [R] version 3.2.3 (2015-12-10) -- "Wooden Christmas-Tree".
 - [RStudio Server] v0.99.491.
-- [Java JDK 7] (1.7.0_91).
-- [Scala] 2.10.
+- [Java JDK 8] (1.8.0_91).
+- [Scala] 2.11.
 - [Zeppelin] 0.5.5.
 - [scikit-learn] 0.17: for Python 2 and 3.
 - [TensorFlow] 0.6.0: for Python 2 and 3, but **ONLY for 64-bit systems**.
@@ -20,7 +20,7 @@ To install the box, you must follow the next steps:
 2. Install [Vagrant].
 3. Install [Git].
 4. Clone this repository to a specific folder:
-```sh 
+```sh
 $ git clone https://github.com/mcolebrook/dsbox.git <YOUR_BOX_FOLDER>
 ```
 
@@ -58,7 +58,7 @@ You have several ways to start up the cluster.
 
 ## Deploy the master and all the slaves
 To deploy the cluster with one master node and two slave nodes by default:
-```sh 
+```sh
 $ vagrant up
 ```
 Bear in mind that the whole process (bringing master+slaves up and the provisioning) may take **several minutes**!! On my Intel Core i7-4790 CPU (4 cores @ 3.60GHz) with 32 Gb RAM, I got the following times:
@@ -77,7 +77,7 @@ Bear in mind that the whole process (bringing master+slaves up and the provision
 
 ## Deploy only the master
 In case you only want to deploy the master node:
-```sh 
+```sh
 $ vagrant up spark-master
 ```
 

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 echo "# install Spark"
-SPARK_VER=1.5.2
-HADOOP_VER=2.6
+SPARK_VER=2.0.2
+HADOOP_VER=2.7
 SPARK_DIST=spark-$SPARK_VER-bin-hadoop$HADOOP_VER
 SPARK_URL="http://www.eu.apache.org/dist/spark/spark-$SPARK_VER/$SPARK_DIST.tgz"
 #TEMP_DIR=/tmp

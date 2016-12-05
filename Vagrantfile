@@ -10,17 +10,17 @@ boxSlave = "ubuntu/trusty32"  # system to be installed on slaves
 #boxSlave = "ubuntu/trusty64"  # system to be installed on slaves
 
 #masterRAM = 4096              # RAM in MB
-masterRAM = 3072              # RAM in MB
-masterCPUs = 2                # CPU cores
+masterRAM = 2048              # RAM in MB
+masterCPUs = 1                # CPU cores
 masterName = "spark-master"   # name of the master node (used in scripts/spark-env-sh)
-masterIP = "10.20.30.100"     # private IP of master node
+masterIP = "10.0.2.100"     # private IP of master node
 
-slaves = 2                    # number of slaves 
+slaves = 2                    # number of slaves
 slaveRAM = 2048               # RAM in MB
 #slaveRAM = 1024               # RAM in MB
-slaveCPUs = 2                 # CPU cores
+slaveCPUs = 1                 # CPU cores
 slaveName = "spark-slave"     # names of the slave nodes with a number appended
-slavesIP = "10.20.30.10"      # private IPs of slaves appending a number
+slavesIP = "10.0.2.50"      # private IPs of slaves appending a number
 
 IPythonPort = 8001            # IPython/Jupyter port to forward (set in IPython config)
 SparkMasterPort = 8080        # SPARK_MASTER_WEBUI_PORT
@@ -41,7 +41,7 @@ Vagrant.configure(2) do |config|
 
   #config.vm.box = box
 
-# config master node 
+# config master node
   config.vm.define masterName do |master|
     master.vm.box = boxMaster
     master.vm.hostname = masterName
@@ -53,7 +53,7 @@ Vagrant.configure(2) do |config|
       # vb.gui = true
 
       vb.memory = masterRAM
-      vb.cpus = masterCPUs 
+      vb.cpus = masterCPUs
       vb.name = master.vm.hostname.to_s
       #vb.customize ['modifyvm', :id, '--natnet1', '192.168.1.0']
     end
@@ -67,7 +67,7 @@ Vagrant.configure(2) do |config|
     # within the machine from a port on the host machine. In the example below,
     # accessing "localhost:8080" will access port 80 on the guest machine.
     # master.vm.network "forwarded_port", guest: 80, host: 8080
- 
+
     master.vm.network :forwarded_port, host: IPythonPort,     guest: IPythonPort
     master.vm.network :forwarded_port, host: SparkMasterPort, guest: SparkMasterPort
     master.vm.network :forwarded_port, host: SparkWorkerPort, guest: SparkWorkerPort
@@ -97,7 +97,7 @@ Vagrant.configure(2) do |config|
     # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
     # documentation for more information about their specific syntax and use.
     #master.vm.provision "shell", inline: <<-SHELL
-    #  echo "Hello from MASTER!!" 
+    #  echo "Hello from MASTER!!"
     #  sudo apt-get update
     #SHELL
 
@@ -113,7 +113,7 @@ Vagrant.configure(2) do |config|
   (1..slaves).each do |i|
     config.vm.define "#{slaveName}-#{i}" do |node|
       node.vm.box = boxSlave
-      node.vm.hostname = "#{slaveName}-#{i}" 
+      node.vm.hostname = "#{slaveName}-#{i}"
       node.vm.network "private_network", ip: "#{slavesIP}#{i}"
       node.vm.synced_folder ".", "/vagrant"
 
@@ -125,7 +125,7 @@ Vagrant.configure(2) do |config|
 
         # Customize the amount of memory on the VM:
         vb.memory = slaveRAM
-        vb.cpus = slaveCPUs 
+        vb.cpus = slaveCPUs
         vb.name = node.vm.hostname.to_s
         #vb.customize ['modifyvm', :id, '--natnet1', '192.168.1.0']
       end

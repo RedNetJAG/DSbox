@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
 echo "# install java"
-JAVA_JDK=openjdk-7-jdk
+JAVA_JDK=openjdk-8-jdk
 HOME=/home/vagrant
 BASHRC=$HOME/.bashrc
-JAVA_DIR=/usr/lib/jvm/java-7-openjdk-i386
+JAVA_DIR=/usr/lib/jvm/java-8-openjdk-i684
 SYSTEM=`uname -m`
 
-if [ "$SYSTEM" == "x86_64" ]; then 
-  JAVA_DIR=/usr/lib/jvm/java-7-openjdk-amd64
+if [ "$SYSTEM" == "x86_64" ]; then
+  JAVA_DIR=/usr/lib/jvm/java-8-openjdk-amd64
 fi
 
 sudo apt-get -y install "$JAVA_JDK" libjansi-java
@@ -26,8 +26,7 @@ sudo apt-get -y install build-essential python-pip python-dev python3-pip python
 
 TEMP_DIR=/tmp
 
-echo "# install scala 2.10"
-wget -q -P $TEMP_DIR -c http://downloads.typesafe.com/scala/2.10.6/scala-2.10.6.deb
-sudo dpkg -i $TEMP_DIR/scala-2.10.6.deb
-rm $TEMP_DIR/scala-2.10.6.deb
-
+echo "# install scala 2.11"
+wget -q -P $TEMP_DIR -c www.scala-lang.org/files/archive/scala-2.11.8.deb
+sudo dpkg -i $TEMP_DIR/scala-2.11.8.deb
+rm $TEMP_DIR/scala-2.11.8.deb
